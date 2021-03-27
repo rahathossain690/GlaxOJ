@@ -3,6 +3,8 @@ An online judge. Like all Online judge, it contains a set of coding problem, all
 
 Live site: [GlaxOJ](https://glaxoj.herokuapp.com/) 
 
+![GlaxOJ Landing Page](https://i.imgur.com/zii0mHk.png)
+
 # Tech-Stack
 ##### Frontend
 URL: [./Frontend](https://github.com/rahathossain690/GlaxOJ/tree/master/Frontend)
