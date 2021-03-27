@@ -1,0 +1,26 @@
+{
+  "development": {
+    "username": "postgres",
+    "password": "glaxoj",
+    "database": "glaxoj",
+    "host": "localhost",
+    "dialect": "postgres",
+    "logging": false
+  },
+  "production": {
+    "username": "YOUR USERNAME",
+    "password": "YOUR PASSWORD",
+    "database": "YOUR DATABASE",
+    "host": "YOUR HOST",
+    "port": "YOUR PORT",
+    "dialect": "postgres",  
+    "logging": false,
+    "ssl": {
+      "rejectUnauthorized": false
+    },
+    "dialectOptions": {
+      "ssl": true
+    },
+    "url": "YOUR URL"
+  }
+}

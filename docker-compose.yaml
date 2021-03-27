@@ -1,0 +1,23 @@
+version: "3"
+services:
+  app:
+      build:
+        dockerfile: Dockerfile
+      depends_on:
+        - "db"
+      restart: unless-stopped
+      working_dir: /var/www
+      ports: 
+        - '3000:3000'
+      environment: 
+        CONNECTION_STRING: "postgresql://${DB_USER}:${DB_PASSWORD}@db:${DB_PORT}/${DB_DATABASE}"
+
+
+    #db
+    db:
+      image: postgres
+      restart: unless-stopped
+      ports: 
+        - '5432:5432'
+      env_file:
+        - database.env
