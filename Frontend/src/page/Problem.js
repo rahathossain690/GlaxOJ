@@ -155,7 +155,7 @@ function Problem() {
                                         <td className="border border-blue-600 p-2 text-center font-black"><Link to={`/problem/${each.id}`}>{each.title}</Link></td>
                                         {userFromContext && <td className="border border-blue-600 p-2 text-center"> {putStatusIcon(each.id)} </td>}
                                         <td className="border border-blue-600 p-2 text-center">{each.tag}</td>
-                                        <td className="border border-blue-600 p-2 text-center"><Link to={"/status?problem_id=" + each.id}>{each.success} / {each.attempt}</Link></td>
+                                        <td className="border border-blue-600 p-2 text-center"><Link to={"/status?problem_id=" + each.id}><span classname="underline">{each.success}</span> / <span classname="underline">{each.attempt}</span></Link></td>
                                         { (problem[0]?.disable === true || problem[0]?.disable === false) && <td className="border border-blue-600 text-center">{each.disable ? "True": "False"}</td>}
                                         { (problem[0]?.disable === true || problem[0]?.disable === false) && <td className="border border-blue-600 text-center"> <button className="p-1 m-1 rounded bg-blue-600 text-white"> <Link to={"/edit?problem_id=" + each.id}>Edit</Link> </button> </td>}
                                     </tr>
