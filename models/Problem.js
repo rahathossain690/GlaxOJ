@@ -17,15 +17,15 @@ module.exports = (sequelize, DataTypes) => {
             unique: true
         },
         content: {
-            type: DataTypes.STRING(1000000),
+            type: DataTypes.STRING(100000),
             allowNull: false
         },
         inputs: {
-            type: DataTypes.ARRAY(DataTypes.STRING(1000000)),
+            type: DataTypes.ARRAY(DataTypes.TEXT),
             allowNull: false
         },
         outputs: {
-            type: DataTypes.ARRAY(DataTypes.STRING(1000000)),
+            type: DataTypes.ARRAY(DataTypes.TEXT),
             allowNull: false
         },
         author: {

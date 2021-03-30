@@ -75,48 +75,57 @@ module.exports =  class Runner {
     }
 
     execute() {
+        //console.log('came 1')
         return new Promise((resolve, reject) => { 
-            let executor = null, start_time = Date.now();
-            executor = execFile(this.COMPILED_FILE_PATH)
-            this.over_the_time_limit = false;
-            const timeout = setTimeout(() => {
-                this.over_the_time_limit = true;
-                try{
-                    executor.stdin.pause()
-                    executor.kill()
-                } catch(err){
+            try{ //console.log('came 2')
+                let executor = null, start_time = Date.now();
+                executor = execFile(this.COMPILED_FILE_PATH, {stdio: ['inherit', 'inherit', 'inherit', 'ipc']}); //console.log('came 3')
+                this.over_the_time_limit = false;
+                const timeout = setTimeout(() => {
+                    this.over_the_time_limit = true;
+                    try{
+                        executor.stdin.pause()
+                        executor.kill()
+                    } catch(err){
 
-                }
-            }, Math.max(this.timelimit, this.MAX_TIME_LIMIT))
-            let output = "";
+                    }
+                }, Math.max(this.timelimit, this.MAX_TIME_LIMIT))
+                let output = "";
 
-            executor.stdout.on('data', (data) => {
-                output += data 
-            });
 
-            executor.stderr.on('data', (data) => { 
-                clearTimeout(timeout)
+                executor.stdout.on('data', (data) => {
+                    output += data 
+                });
+
+                executor.stderr.on('data', (data) => { 
+                    clearTimeout(timeout)
+                    reject( new Error("Runtime Error") )
+                });
+
+                executor.on('close', code => {
+                    clearTimeout(timeout)
+                    if(this.over_the_time_limit) {
+                        reject( new Error("Time Limit Exceeded") )
+                    }
+                    if(code === null) {
+                        reject( new Error("Memory Limit Exceeded") )
+                    } else if(code === 0) {
+                        resolve( [String(output), Date.now() - start_time])
+                    } else { 
+                        reject( new Error("Runtime Error") );
+                    }
+                })
+                const stdinStream = new Readable();
+                stdinStream.push(this.input);
+                stdinStream.push(null);
+                stdinStream.pipe(executor.stdin).on('error', (err) => {
+                    // no need to push
+                    // console.log(err)
+                });
+
+            } catch(err) {
                 reject( new Error("Runtime Error") )
-            });
-
-            executor.on('close', code => {
-                clearTimeout(timeout)
-                if(this.over_the_time_limit) {
-                    reject( new Error("Time Limit Exceeded") )
-                }
-                if(code === null) {
-                    reject( new Error("Memory Limit Exceeded") )
-                } else if(code === 0) {
-                    resolve( [String(output), Date.now() - start_time])
-                } else { 
-                    reject( new Error("Runtime Error") );
-                }
-            })
-            const stdinStream = new Readable();
-            stdinStream.push(this.input);
-            stdinStream.push(null);
-            stdinStream.pipe(executor.stdin);
-
+            }
         })
     }
 
@@ -125,16 +134,16 @@ module.exports =  class Runner {
         return new Promise((resolve, reject) => {
             let compiled = false;
             this.compile()
-                .then(() => {
+                .then(() => { //console.log('compiled')
                     compiled = true
                 })
-                .catch(() => {
+                .catch(() => { //console.log('compiled error')
                     throw new Error('Compilation Error')
                 })
                 .then(() => {
                     return this.execute()
                 })
-                .then(output => { // [output, timelimit]
+                .then(output => { //console.log('executed')// [output, timelimit]
                     this.check_for_immunity(output[1])
                     resolve({
                         success: true,
@@ -143,7 +152,7 @@ module.exports =  class Runner {
                         time: output[1]
                     })
                 })
-                .catch(err => {
+                .catch(err => { //console.log('dont forget me', err)
                     reject({
                         success: false,
                         output: null,
@@ -151,7 +160,7 @@ module.exports =  class Runner {
                         time: null
                     })
                 })
-                .finally(() => {
+                .finally(() => { //console.log('here')
                     try{
                         this.delete_file(`${this.SOURCE_FILE_PATH}`)
                         if(this.extension === 'cpp' && compiled) this.delete_file(`${this.COMPILED_FILE_PATH}`)

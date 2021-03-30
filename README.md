@@ -1,5 +1,5 @@
 # GlaxOJ
-An online judge. Like all Online judge, it contains a set of coding problem, allows its authenticated users to solve them and get verdicts. It allows some extended features too that users can enjoy.
+GlaxOJ is an online judge application. Like all online judges, it contains a set of coding problems, allows its authenticated users to solve them and get verdicts. It allows some extended features too that users can enjoy.
 
 Live site: [GlaxOJ](https://glaxoj.herokuapp.com/) 
 
@@ -16,6 +16,7 @@ URL: [./Frontend](https://github.com/rahathossain690/GlaxOJ/tree/master/Frontend
 1. Node-js
 2. PostgreSQL database
 3. Sequelize ORM
+
 and Dockerized.
 
 ##### Deployment
@@ -66,4 +67,4 @@ Users can -
 Feel free to contribute and share your thoughts on this project.
 
 # Acknowledgment
-This is OJ is based on a long time dream and a so-called short time class project (Thanks to COVID). A big shoutout and a little thanks to [Faiaz Khan](https://github.com/faiazamin) for trusting me and agreeing for this as our project idea. A little thanks to [NJ Rafi](https://github.com/njrafi) vai too. Rest of all the big thanks go to stack-overflow, all the stack-docs, all the kind hearted wingless angels and their tech blogs, github issues and all the gods solving there and my lost hairs / sleeps / will to live / chance of getting a girlfriend.
+This is OJ is based on a long time dream and a so-called short time class project (Thanks to COVID). The name was suggested by [Farhan Fuad](https://github.com/farhanfuad35) Bro. A big shoutout and a little thanks to [Faiaz Khan](https://github.com/faiazamin) for trusting me and agreeing for this as our project idea. A little thanks to [NJ Rafi](https://github.com/njrafi) vai too. Rest of all the big thanks go to stack-overflow, all the stack-docs, all the kind hearted wingless angels and their tech blogs, github issues and all the gods solving there and my lost hairs / sleeps / will to live / chance of getting a girlfriend.

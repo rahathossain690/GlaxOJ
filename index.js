@@ -38,11 +38,6 @@ app.get('/', (req, res) => {
 
 
 
-app.use(express.urlencoded({
-    extended: true
-  }));
-app.use(express.json());
-
 
 // dirty dirty dirty
 
@@ -195,6 +190,17 @@ app.post('/auth', (req, res) => {
 
 
 const routes = require('./routes')
+
+app.use(express.json({
+    limit: '50mb'
+}));
+
+app.use(express.urlencoded({
+    limit: '50mb',
+    parameterLimit: 100000,
+    extended: true
+  }));
+
 app.use(routes)
 
 const db = require('./models')
@@ -203,8 +209,15 @@ const {start_judge_queue} = require('./controller/judge')
 const { SUCCESS, FAILURE } = require('./api_response')
 start_judge_queue(); // start judge queue at the beginning
 
+
+const {ektu_chalak_function} = require('./controller/submission/submission.controller')
+
 db.sequelize.sync({ alter: true }).then(async(_) => { 
     console.log('database connected')
+    
+    // one temporary thing 
+    ektu_chalak_function()
+    
     
     // adding one default admin if not there
     await upsert_user({

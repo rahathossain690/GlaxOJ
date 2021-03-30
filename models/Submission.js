@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
             defaultValue: "Not Judged Yet"
         },
         source_code: {
-            type: DataTypes.STRING(10000),
+            type: DataTypes.STRING(1000000),
             allowNull: false
         }
     })

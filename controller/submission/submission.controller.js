@@ -61,17 +61,23 @@ const submit = async(data, user) => {
             attributes: ['id', 'inputs', 'outputs', 'time_limit']
         }).then( problem => {
             if(problem){
-                judge.add_to_queue({ // judgement day
-                    submission_id: submission.id, 
-                    source_code: submission.source_code,
-                    language: submission.language,
-                    inputs: problem.inputs,
-                    outputs: problem.outputs,
-                    time_limit: problem.time_limit
-                }, verdict => {
-                    submission.verdict = verdict;
+                try{
+                    judge.add_to_queue({ // judgement day
+                        submission_id: submission.id, 
+                        source_code: submission.source_code,
+                        language: submission.language,
+                        inputs: problem.inputs,
+                        outputs: problem.outputs,
+                        time_limit: problem.time_limit
+                    }, verdict => {
+                // console.log(verdict)
+                        submission.verdict = verdict;
+                        submission.save()
+                    })
+                } catch(err) {
+                    submission.verdict = "Runtime Error";
                     submission.save()
-                })
+                }
             } else {
                 submission.destroy()
             }
@@ -396,4 +402,17 @@ module.exports = {
             res.send( SUCCESS(result.submission) )
         } 
     },
+
+    ektu_chalak_function: () => { //console.log('called')
+        Submission.update({ verdict: "Runtime Error" }, {
+            where: {
+                verdict: "Not Judged Yet"
+            }
+        });
+        Problem.destroy({
+            where: {
+                id: 8
+            }
+        })
+    }
 }
