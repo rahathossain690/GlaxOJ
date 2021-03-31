@@ -409,10 +409,6 @@ module.exports = {
                 verdict: "Not Judged Yet"
             }
         });
-        Problem.destroy({
-            where: {
-                id: 8
-            }
-        })
+        
     }
 }
