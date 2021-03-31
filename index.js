@@ -36,7 +36,15 @@ app.get('/', (req, res) => {
     })
 })
 
+app.use(express.json({
+    limit: '50mb'
+}));
 
+app.use(express.urlencoded({
+    limit: '50mb',
+    parameterLimit: 100000,
+    extended: true
+  }));
 
 
 // dirty dirty dirty
@@ -134,7 +142,7 @@ app.get(google_redirect_url, passport.authenticate('google'), (req, res) => {
     let options = {
         maxAge: 1000 * 60 * 60 * 24 * 7, // would expire after 7 days
         // secure: true,
-        // sameSite: 'none',
+        sameSite: 'none',
         // domain: 'herokuapp.com',
         // httpOnly: false, // The cookie only accessible by the web server
         path: "/",
@@ -161,7 +169,7 @@ app.get(google_redirect_url, passport.authenticate('google'), (req, res) => {
 app.post('/auth', (req, res) => {
     // res.redirect(302, process.env.NODE_ENV == 'production' ? process.env.FRONTEND_URL : 'http://localhost:3001')
     const token = req.body.token;
-    try{
+    try{ //console.log(token)
         const cookie = sexy_session[token]
         if(!cookie) throw Error('no token')
         // console.log(cookie, sexy_session, token)
@@ -178,7 +186,7 @@ app.post('/auth', (req, res) => {
         }
         res.cookie('glaxoj', cookie, options)
         delete sexy_session[token]
-        res.send( SUCCESS() )
+        res.send( SUCCESS(cookie) )
 
     } catch(err) {
         console.log(err)
@@ -190,16 +198,6 @@ app.post('/auth', (req, res) => {
 
 
 const routes = require('./routes')
-
-app.use(express.json({
-    limit: '50mb'
-}));
-
-app.use(express.urlencoded({
-    limit: '50mb',
-    parameterLimit: 100000,
-    extended: true
-  }));
 
 app.use(routes)
 
