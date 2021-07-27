@@ -1,7 +1,7 @@
 # GlaxOJ
 GlaxOJ is an online judge application. Like all online judges, it contains a set of coding problems, allows its authenticated users to solve them and get verdicts. It allows some extended features too that users can enjoy.
 
-Live site: [GlaxOJ](https://glaxoj.herokuapp.com/) 
+Live site: [GlaxOJ](https://glaxoj-frontend.onrender.com/) 
 
 ![GlaxOJ Landing Page](https://i.imgur.com/zii0mHk.png)
 
@@ -20,7 +20,7 @@ URL: [./Frontend](https://github.com/rahathossain690/GlaxOJ/tree/master/Frontend
 and Dockerized.
 
 ##### Deployment
-1. Heroku with docker
+1. Render with docker
 
 # Installation
 1. Install nodejs.
@@ -67,4 +67,4 @@ Users can -
 Feel free to contribute and share your thoughts on this project.
 
 # Acknowledgment
-This is OJ is based on a long time dream and a so-called short time class project (Thanks to COVID). The name was suggested by [Farhan Fuad](https://github.com/farhanfuad35) bro. A big shoutout and a little thanks to [Faiaz Khan](https://github.com/faiazamin) bro. A little thanks to [NJ Rafi](https://github.com/njrafi) vai too. Rest of all the big thanks go to stack-overflow, all the stack-docs, all the kind hearted wingless angels and their tech blogs, github issues and all the gods solving there and my lost hairs / sleeps / will to live / chance of getting a girlfriend.
+(As of april, 2021) This is OJ is based on a long time dream and a so-called short time class project (Thanks to COVID). The name was suggested by [Farhan Fuad](https://github.com/farhanfuad35) bro. A big shoutout and a little thanks to [Faiaz Khan](https://github.com/faiazamin) bro. A little thanks to [NJ Rafi](https://github.com/njrafi) vai too. Rest of all the big thanks go to stack-overflow, all the stack-docs, all the kind hearted wingless angels and their tech blogs, github issues and all the gods solving there and my lost hairs / sleeps / will to live / chance of getting a girlfriend.
